@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歌词管理系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 歌词管理系统</h1>
+            <div class="reload-tip" id="reloadTip">
+                💡 <strong>提示：</strong>修改或新增歌词后，请在群里发送 <code onclick="copyCommand()" title="点击复制到剪贴板">/lyric reload</code>
+                以重新加载歌词
+            </div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索歌词...">
+                    <button class="btn btn-search" onclick="searchLyrics()">搜索</button>
+                </div>
+                <div class="admin-actions">
+                    <button class="btn btn-primary" onclick="showCreateModal()">+ 新建歌词</button>
+                    <!-- <button class="btn btn-secondary" onclick="logout()">退出登录</button> -->
+                </div>
+            </div>
+        </header>
+
+        <main>            <!-- 歌词列表 -->
+            <div class="lyrics-list" id="lyricsList">
+                <div class="loading">加载中...</div>
+            </div>
+
+            <!-- 分页控件 -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevPage()">上一页</button>
+                <span class="page-info" id="pageInfo">第 1 页，共 1 页</span>
+                <button class="btn btn-secondary" id="nextBtn" onclick="nextPage()">下一页</button>
+            </div>
+
+            <!-- 搜索结果 -->
+            <div class="search-results" id="searchResults" style="display: none;">
+                <h3>搜索结果</h3>
+                <div id="searchResultsList"></div>
+                <button class="btn-secondary" onclick="showAllLyrics()">返回全部歌词</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 创建/编辑模态框 -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">新建歌词</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="filenameInput">歌曲名称:</label>
+                    <input type="text" id="filenameInput" placeholder="输入歌曲名称">
+                </div>
+                <div class="form-group">
+                    <label for="contentInput">歌词内容:</label>
+                    <textarea id="contentInput" placeholder="输入歌词内容..." rows="15"></textarea>
+                </div>
+            </div>            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+                <button class="btn btn-primary" id="saveBtn" onclick="saveLyrics()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除模态框 -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>确认删除</h2>
+                <span class="close" onclick="closeDeleteModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除歌曲 "<span id="deleteFilename"></span>" 吗？</p>
+                <p class="warning">此操作不可撤销！</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeDeleteModal()">取消</button>
+                <button class="btn-danger" id="confirmDeleteBtn" onclick="confirmDelete()">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 重命名模态框 -->
+    <div class="modal" id="renameModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>重命名歌曲</h2>
+                <span class="close" onclick="closeRenameModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="newFilenameInput">新名称:</label>
+                    <input type="text" id="newFilenameInput" placeholder="输入新的歌曲名称">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeRenameModal()">取消</button>
+                <button class="btn-primary" onclick="confirmRename()">重命名</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 消息提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
