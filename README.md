@@ -11,17 +11,27 @@
 - 🎨 **现代化UI**: 美观的界面设计
 - 🚀 **易于部署**: 基于Node.js，轻量级部署
 
+![img_1.png](.github/img_1.png)
+
+![img_2.png](.github/img_2.png)
+
+---
+
+
+
 ## 安装和运行
 
 ## 快速开始
 
 ### Windows 用户
+
 ```bash
 # 双击运行部署脚本
 deploy-windows.bat
 ```
 
-### Linux 用户  
+### Linux 用户
+
 ```bash
 # 运行部署脚本
 chmod +x deploy-linux.sh
@@ -32,30 +42,32 @@ chmod +x deploy-linux.sh
 
 1. **配置设置**
    编辑 `config.conf` 文件修改端口和密码
-
 2. **安装依赖**
+
    ```bash
    cd admin
    npm install
    ```
-
 3. **启动服务**
+
    ```bash
    npm start
    ```
-
 4. **访问系统**
+
    - 浏览器访问: http://localhost:3000
    - 默认密码: `admin`
 
 ### 生产环境部署
 
 **Linux服务器:**
+
 ```bash
 ./deploy-linux.sh
 ```
 
 **Windows服务器:**
+
 ```bash
 deploy-windows.bat
 ```
@@ -63,7 +75,8 @@ deploy-windows.bat
 ## 配置说明
 
 编辑 `config.conf` 文件修改配置：
-- `PORT` - 服务端口（默认3000）  
+
+- `PORT` - 服务端口（默认3000）
 - `ADMIN_PASSWORD` - 管理员密码（默认admin）
 - `NODE_ENV` - 运行环境
 
