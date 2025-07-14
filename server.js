@@ -46,7 +46,7 @@ app.use('/script.js', express.static(path.join(__dirname, 'public', 'script.js')
 const getLyricsPath = () => {
   // 如果是生产环境（服务器）
   if (process.env.NODE_ENV === 'production') {
-    return '/root/data/plugins/astrbot_plugin_lyricnext/data/lyrics/';
+    return process.env.PRODUCTION_LYRICS_PATH || '/root/data/lyrics_data';
   }
   // 开发环境（本地）
   return path.join(__dirname, '..', 'data', 'lyrics');
